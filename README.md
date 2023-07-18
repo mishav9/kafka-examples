@@ -25,24 +25,31 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // Access the changeset information
+                // Access the changesets information
                 script {
-                    // Get the affected files in the changeset
-                    def affectedFiles = CHANGESET['items']
+                    // Get all changesets in the current build
+                    def changesets = CHANGESETS
                     
-                    // Print the affected files
-                    for (def file : affectedFiles) {
-                        println "Modified File: ${file.path}"
+                    // Iterate over each changeset
+                    for (def changeset : changesets) {
+                        // Get the affected files in the changeset
+                        def affectedFiles = changeset['items']
+                        
+                        // Print the affected files
+                        for (def file : affectedFiles) {
+                            println "Modified File: ${file.path}"
+                        }
+                        
+                        // Get the commit message
+                        def commitMessage = changeset['msg']
+                        println "Commit Message: ${commitMessage}"
+                        
+                        println "-----------------------"
                     }
-                    
-                    // Get the commit message
-                    def commitMessage = CHANGESET['msg']
-                    println "Commit Message: ${commitMessage}"
                 }
                 
-                // Deploy your application or perform other actions based on the changeset
+                // Deploy your application or perform other actions based on the changesets
             }
         }
     }
 }
-
