@@ -32,3 +32,25 @@ echo "Exiting the script."
 
 
 ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
+
+
+#!/bin/bash
+
+# Function to validate the number using regex
+validate_number() {
+    # Regex pattern for a valid number
+    regex="^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$"
+    echo $regex
+    if [[ $1 =~ $regex ]]; then
+        echo "Valid number: $1"
+    else
+        echo "Invalid number: $1"
+    fi
+}
+
+# Read input from the user
+read -p "Enter a number: " number
+
+# Call the function to validate the number
+validate_number "$number"
+
