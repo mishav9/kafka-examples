@@ -28,3 +28,7 @@ done
 
 # Add any additional actions you want to perform after the Dataflow job has completed
 echo "Exiting the script."
+
+
+
+^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$
