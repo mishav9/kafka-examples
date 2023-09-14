@@ -41,3 +41,16 @@ pre_commit_check:
     -   echo "Error: The current branch '$current_branch' is not created from the '$dev_branch' branch."
     -   exit 1
     - fi
+
+
+stages:
+  - check_branch
+
+check_branch:
+  script:
+    - if [ "$CI_COMMIT_REF_NAME" != "master" ] && [ "$(git merge-base --is-ancestor master "$CI_COMMIT_REF_NAME" && echo true)" != "true" ]; then
+        echo "Branch is not created from master.";
+      else
+        echo "Branch is created from master.";
+      fi
+
